@@ -1,0 +1,177 @@
+
+<header>
+	<meta charset="utf-8"/>
+</header>
+
+	<div class="container spacer">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+			     Listes
+			     
+			</div>
+			<div class="panel-body">
+				<hr>
+			    <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal"
+			    ui-sref="message/nouveauMessage" ng-repeat="role in dataUser.roles" ng-if="role.role=='ADMIN'"><span class="glyphicon glyphicon-plus"></span></button>
+			    <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal"
+			     ng-click="listMessage()"><span class="glyphicon glyphicon-refresh"></span></button>
+			    <h2>Messages</h2>
+			    <span class="clearfix"></span>
+			    <hr>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Date Message</th><th>Title</th><th>Contenu</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="m in pageMessage.content">
+							<td>{{m.date_message |date:'dd/MM/yyyy'}}</td>
+							<td>{{m.title}}</td>
+							<td>{{m.contenu}}</td>
+							<td>
+					               <button type="button" class="btn btn-info" data-toggle="modal"
+					    data-target="#myModalEdit" ng-click="editM(m.id)" id="Edit" ng-repeat="role in dataUser.roles" ng-if="role.role=='ADMIN'"><span class="glyphicon glyphicon-pencil"></span></button>
+					    
+					        </td>
+					        <td>
+					              <button type="button" class="btn btn-danger" data-toggle="modal"
+   								 data-target="#myModalDelete" ng-click="deleteM(m.id)" ng-repeat="role in dataUser.roles" ng-if="role.role=='ADMIN'"><span class="glyphicon glyphicon-remove"></span></button>
+   								 
+   								
+					        </td>
+							
+							
+						</tr>
+					</tbody>
+					
+				</table>
+				<div class="container">
+						<ul class="nav nav-pills">
+							<li ng-class="{active:$index==pageCourante}" ng-repeat="p in pages track by $index" class="clickable">
+								<a ng-click="gotoPage($index)">{{$index}}</a>
+							</li>
+						</ul>
+				</div>
+				
+				
+		</div>
+	</div>
+	
+</div>
+	
+	<!-- Modal  EDIT Message-->
+  <div class="modal fade" id="myModalEdit" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit this Message</h4>
+        </div>
+        <div class="modal-body">
+          
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label class="control-label col-sm-2">Title</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="message.title">
+                  <span ng-if="errors" class="error">{{errors.title}}</span>
+                </div>
+              </div>
+               <div class="form-group">
+                <label class="control-label col-sm-2">Contenu</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="message.contenu">
+                  <span ng-if="errors" class="error">{{errors.contenu}}</span>
+                </div>
+              </div>
+              <div class="form-group"> 
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default" ng-click="updateMessage();listMessage()" data-dismiss="modal">Save</button>
+                </div>
+              </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+	
+	
+	<!-- Modal delete Message-->
+  <div class="modal fade" id="myModalDelete" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Are you Sure?</h4>
+        </div>
+        <div class="modal-body">
+            <strong style="color:red;">
+              You are going to delete {{message.title}}. All information...
+            </strong>
+            
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="deleteMessage();listMessage()">Yes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  
+	 <!-- Modal  NEW Message-->
+  <div class="modal fade" id="myModalAdd" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">New Message</h4>
+        </div>
+        <div class="modal-body">
+          
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label class="control-label col-sm-2">Title</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="newMessage.title">
+                  <span ng-if="errors" class="error">{{errors.title}}</span>
+                </div>
+              </div>
+               <div class="form-group">
+                <label class="control-label col-sm-2">Email</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="newMessage.contenu">
+                  <span ng-if="errors" class="error">{{errors.contenu}}</span>
+                </div>
+              </div>
+
+              <div class="form-group"> 
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default" ng-click="saveMessageStatic()" data-dismiss="modal">Save</button>
+                </div>
+              </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+	
+	
+
