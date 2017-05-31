@@ -1,0 +1,82 @@
+.spacer{
+	margin-top:20px;
+}
+.error{
+	color:red;
+}
+.clickable{
+	cursor: pointer;
+}
+.spacer40{
+	margin-top: 40px;
+}
+.red{
+	color:red;
+}
+
+ /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+  
+   .boutona span{
+	 color:black;
+	 display:inline-block;
+	 padding : 10px 15px;
+	~webkit-border-raduis:6px;
+	background: ~webkit-gradient(linear,left top, left botton, from(#e5650f), to(#ea751f));
+ }
+
+
+/*td {
+    padding: 0;
+    margin : 0;
+}*/
+
+
+td a{
+display: block;
+width:100%;
+height: 100%;
+text-align:center;
+cursor: pointer;
+padding : 5px;
+
+}
+a:link 
+{ 
+ text-decoration:none; 
+} 
+
+
+.popover-title{
+    background: black;
+}
+.popover-content{
+	text-color:black;
+}
+
+.scrollable{
+	height: 400px;
+	overflow: scroll;
+}

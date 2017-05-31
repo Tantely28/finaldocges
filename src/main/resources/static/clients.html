@@ -1,0 +1,217 @@
+<header>
+	<meta charset="utf-8"/>
+</header>
+<!-- saisi dans la zone de texte va stocker dans key_word_nom -->
+			
+<div class="container spacer">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+		
+				<hr>
+				<button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal"
+			     ui-sref="clients/viderClient" ng-click="viderClient()">Vider</button>
+			    <button type="button" class="btn btn-info btn-lg pull-right" data-target="#myModalAdd" data-toggle="modal"
+			    ng-repeat="role in dataUser.roles" ng-if="role.role=='ADMIN'"><span class="glyphicon glyphicon-plus"></span></button>
+			    
+			    <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" ng-click="searchClient()"
+			    >Chercher</button>
+			    
+			    <h2>Clients</h2>
+			    <span class="clearfix"></span>
+			    <hr>
+				
+				<div class="form-group">
+				    <div class="col-xs-5 input-group input-group-sm icon-addon addon-sm">
+				        <input type="text" placeholder="Nom" name="" id="schbox" class="form-control input-lg" ng-model="key_word_nom">
+				        <i class="icon icon-search"></i>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <div class="col-xs-5 input-group input-group-sm icon-addon addon-sm">
+				        <input type="text" placeholder="Téléphone" name="" id="schbox" class="form-control input-lg" ng-model="key_word_telephone">
+				        <i class="icon icon-search"></i>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <div class="col-xs-5 input-group input-group-sm icon-addon addon-sm">
+				        <input type="text" placeholder="Code Postale" name="" id="schbox" class="form-control input-lg" ng-model="key_word_code_postale">
+				        <i class="icon icon-search"></i>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <div class="col-xs-5 input-group input-group-sm icon-addon addon-sm">
+				        <input type="text" placeholder="Ville" name="" id="schbox" class="form-control input-lg" ng-model="key_word_ville">
+				        <i class="icon icon-search"></i>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <div class="col-xs-5 input-group input-group-sm icon-addon addon-sm">
+				        <input type="text" placeholder="Numéro client" name="" id="schbox" class="form-control input-lg" ng-model="key_word_numero_client">
+				        <i class="icon icon-search"></i>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <div class="col-xs-5 input-group input-group-sm icon-addon addon-sm">
+				        <input type="text" placeholder="Référence client" name="" id="schbox" class="form-control input-lg" ng-model="key_word_ref_client">
+				        <i class="icon icon-search"></i>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <div class="col-xs-5 input-group input-group-sm icon-addon addon-sm">
+				        <input type="text" placeholder="Numéro serie" name="" id="schbox" class="form-control input-lg" ng-model="key_word_numero_serie">
+				        <i class="icon icon-search"></i>
+				    </div>
+				</div>
+				
+					<!-- <div class="form-group">
+				        <div class="col-xs-5 selectContainer">
+				            <select class="form-control" name="partenaires">
+				            	<option value="">Tous les partenaires</option>
+				                <option value="p1">partenaire 1</option>
+				                <option value="p2">partenaire 2</option>
+				                <option value="p3">partenaire 3</option>
+				                <option value="p4">partenaire 4</option>
+				                <option value="p5">partenaire 5</option>
+				            </select>
+				        </div>
+				    </div>		
+				    <div class="form-group">
+				        <div class="col-xs-5 selectContainer">
+				            <select class="form-control" name="clients">
+				                <option value="">Tous les types de clients</option>
+				                <option value="p">particulier</option>
+				                <option value="e">entreprise</option>
+				            </select>
+				        </div>
+				  </div>-->
+				<hr>
+		
+		</div>
+		<div class="container">
+		</div>
+		
+		<div class="panel-body">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<!--  <th>Partenaires</th>-->
+						<th>ClientNumero</th><th>Reference</th><th>Nom</th><th>Ville</th>
+						<th>Code Postale</th><th>Téléphone</th>
+					</tr>
+				</thead>
+		
+				<tbody>
+					<tr ng-repeat="c in pageClients.content">
+						<!--  <td>{{c.partenaire}}</td>-->
+						<td>{{c.numero_client}}</td>
+						<td>{{c.reference}}</td>
+						<td>{{c.nom}}</td>
+						<td>{{c.ville}}</td>
+						<td>{{c.code_postale}}</td>
+						<td>{{c.telephone}}</td>
+					</tr>
+				</tbody>
+				
+			</table>
+		
+			<div class="container">
+						<ul class="nav nav-pills">
+							<li ng-class="{active:$index==pageCourante}" ng-repeat="p in pages track by $index" class="clickable">
+								<a ng-click="gotoPage($index)">{{$index}}</a>
+							</li>
+						</ul>
+				</div>
+			
+			
+	</div>
+</div>
+
+
+
+
+
+<!-- Modal  add client-->
+		  <div class="modal fade" id="myModalAdd" role="dialog">
+		    <div class="modal-dialog">
+		    
+		      <!-- Modal content-->
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Add new Customer </h4>
+		        </div>
+		        <div class="modal-body">
+		          
+		            <form class="form-horizontal">
+		              <div class="form-group">
+		                <label class="control-label col-sm-2">Nom</label>
+		                <div class="col-sm-10">
+		                  <input type="text" class="form-control" ng-model="client.nom">
+		                  <span ng-if="errors" class="error">{{errors.nom}}</span>
+		                </div>
+		              </div>
+		              <div class="form-group">
+		                <label class="control-label col-sm-2">Prénom</label>
+		                <div class="col-sm-10">
+		                  <input type="text" class="form-control" ng-model="client.prenom">
+		                  <span ng-if="errors" class="error">{{errors.prenom}}</span>
+		                </div>
+		              </div>
+		               <div class="form-group">
+		                <label class="control-label col-sm-2">Numéro client</label>
+		                <div class="col-sm-10">
+		                  <input type="text" class="form-control" ng-model="client.numero_client">
+		                  <span ng-if="errors" class="error">{{errors.numero_client}}</span>
+		                </div>
+		              </div>
+		               <div class="form-group">
+		                <label class="control-label col-sm-2">Téléphone</label>
+		                <div class="col-sm-10">
+		                  <input type="text" class="form-control" ng-model="client.telephone">
+		                  <span ng-if="errors" class="error">{{errors.telephone}}</span>
+		                </div>
+		              </div> 
+		               <div class="form-group">
+		                <label class="control-label col-sm-2">Numéro de serie</label>
+		                
+		                <div class="col-sm-10">
+		                  <input type="text" class="form-control" ng-model="client.numero_serie">
+		                  <span ng-if="errors" class="error">{{errors.numero_serie}}</span>
+		                </div>
+		              </div>
+		              <div class="form-group">
+		                <label class="control-label col-sm-2">reference</label>
+		                <div class="col-sm-10">
+		                  <input type="text" class="form-control" ng-model="client.reference">
+		                  <span ng-if="errors" class="error">{{errors.reference}}</span>
+		                </div>
+		              </div>
+		               <div class="form-group">
+		                <label class="control-label col-sm-2">Code postale</label>
+		                <div class="col-sm-10">
+		                  <input type="text" class="form-control" ng-model="client.code_postale">
+		                   <span ng-if="errors" class="error">{{errors.code_postale}}</span>
+		                </div>
+		              </div>
+		               <div class="form-group">
+		                <label class="control-label col-sm-2">Ville</label>
+		                <div class="col-sm-10">
+		                  <input type="text" class="form-control" ng-model="client.ville">
+		                  <span ng-if="errors" class="error">{{errors.ville}}</span>
+		                </div>
+		              </div> 
+		              <div class="form-group"> 
+		                <div class="col-sm-offset-2 col-sm-10">
+		                  <button type="submit" class="btn btn-default" ng-click="saveClient()" data-dismiss="modal">Save</button>
+		                </div>
+		              </div>
+		            </form>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		      
+		    </div>
+		    </div>
+</div>
